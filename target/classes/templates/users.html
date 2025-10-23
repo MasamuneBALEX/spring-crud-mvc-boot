@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Users</title>
+</head>
+<body>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>City</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.firstName}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.city}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:action="${user}">
+            <a th:href="@{/update(userId=${user.id})}">Edit</a>
+            <form th:action="@{/delete}" method="post">
+                <input type="hidden" name="userId" th:value="${user.id}">
+                <button>Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<div class="form-editing">
+    <form class="form" th:action="@{/add}" method="post" th:object="${user}">
+        <input type="text" th:field="*{firstName}" placeholder="First Name">
+        <input type="text" th:field="*{surname}" placeholder="Surname">
+        <input type="number" th:field="*{age}" placeholder="Age">
+        <input type="text" th:field="*{city}" placeholder="City">
+        <input type="text" th:field="*{username}" placeholder="Username">
+        <input type="text" th:field="*{email}" placeholder="Email">
+        <button type="submit">Add User</button>
+    </form>
+    <form class="form" th:action="@{/update}" method="post" th:object="${user}">
+        <input type="hidden" name="userId" th:value="${user.id}">
+        <input type="text" th:field="*{firstName}" placeholder="First Name">
+        <input type="text" th:field="*{surname}" placeholder="Surname">
+        <input type="number" th:field="*{age}" placeholder="Age">
+        <input type="text" th:field="*{city}" placeholder="City">
+        <input type="text" th:field="*{username}" placeholder="Username">
+        <input type="text" th:field="*{email}" placeholder="Email">
+        <button type="submit">Update User</button>
+    </form>
+</div>
+
+</body>
+</html>
