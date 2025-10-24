@@ -2,22 +2,22 @@ package com.spring.crud.boot.project.web_data.models;
 
 import jakarta.persistence.*;
 
-@Entity(name = "users")
+@Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
 
-    @Column(name = "first_name")
+    @Column
     private String firstName;
-    @Column(name = "surname")
+    @Column
     private String surname;
-    @Column(name = "age")
+    @Column
     private int age;
-    @Column(name = "city")
+    @Column
     private String city;
-    @Column(name = "username")
+    @Column
     private String username;
 
     @Column
